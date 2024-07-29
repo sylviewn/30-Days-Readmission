@@ -18,32 +18,27 @@
         .container {
             padding: 20px;
         }
-        .images {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .images img {
-            max-width: 45%;
-            height: auto;
-            border-radius: 8px;
-        }
-        form {
+        .form-container {
             margin: 20px auto;
             padding: 20px;
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             display: inline-block;
+            width: 300px;
         }
         label, input, button {
             display: block;
             margin: 10px 0;
             font-size: 1.2em;
+            width: 100%;
+        }
+        input {
+            padding: 10px;
+            font-size: 1em;
         }
         button {
-            padding: 10px 20px;
+            padding: 10px;
             background: #28a745;
             color: #fff;
             border: none;
@@ -53,23 +48,28 @@
         button:hover {
             background: #218838;
         }
+        .mental-health-image {
+            max-width: 50%;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Mental Health Readmission Prediction</h1>
-        <div class="images">
-            <img src="static/images/mental-health-1.jpg" alt="Mental Health Image 1">
-            <img src="static/images/mental-health-3.jpg" alt="Mental Health Image 2">
+        <div class="form-container">
+            <form action="/predict" method="post">
+                <label for="YTD_Rate">YTD Rate:</label>
+                <input type="text" id="YTD_Rate" name="YTD_Rate" required>
+                <button type="submit">Predict</button>
+            </form>
+            {% if prediction_text %}
+                <h2>{{ prediction_text }}</h2>
+            {% endif %}
         </div>
-        <form action="/predict" method="post">
-            <label for="YTD_Rate">YTD Rate:</label>
-            <input type="text" id="YTD_Rate" name="YTD_Rate" required>
-            <button type="submit">Predict</button>
-        </form>
-        {% if prediction_text %}
-            <h2>{{ prediction_text }}</h2>
-        {% endif %}
+        <img src="static/images/mental-health-3.jpg" alt="Mental Health" class="mental-health-image">
     </div>
 </body>
 </html>

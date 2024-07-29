@@ -7,51 +7,70 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
             text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
         }
         h1 {
             color: #333;
         }
+        .container {
+            padding: 20px;
+        }
+        .images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .images img {
+            max-width: 45%;
+            height: auto;
+            border-radius: 8px;
+        }
         form {
-            margin-top: 20px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: inline-block;
         }
-        input[type="number"] {
-            padding: 10px;
-            font-size: 16px;
-            width: 200px;
+        label, input, button {
+            display: block;
+            margin: 10px 0;
+            font-size: 1.2em;
         }
-        input[type="submit"] {
+        button {
             padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
+            background: #28a745;
+            color: #fff;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-        h2 {
-            margin-top: 20px;
-            color: #4CAF50;
+        button:hover {
+            background: #218838;
         }
     </style>
 </head>
 <body>
-    <h1>Mental Health Readmission Predictor</h1>
-    <p>Enter the Year-to-Date (YTD) Rate to predict the Readmission Rate:</p>
-    
-    <form action="{{ url_for('predict') }}" method="post">
-        <input type="number" step="0.01" name="YTD_Rate" placeholder="Enter YTD Rate" required>
-        <input type="submit" value="Predict">
-    </form>
-
-    {% if prediction_text %}
-        <h2>{{ prediction_text }}</h2>
-    {% endif %}
+    <div class="container">
+        <h1>Mental Health Readmission Prediction</h1>
+        <div class="images">
+            <img src="static/images/mental-health-1.jpg" alt="Mental Health Image 1">
+            <img src="static/images/mental-health-3.jpg" alt="Mental Health Image 2">
+        </div>
+        <form action="/predict" method="post">
+            <label for="YTD_Rate">YTD Rate:</label>
+            <input type="text" id="YTD_Rate" name="YTD_Rate" required>
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction_text %}
+            <h2>{{ prediction_text }}</h2>
+        {% endif %}
+    </div>
 </body>
 </html>
 
